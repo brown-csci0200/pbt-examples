@@ -1,5 +1,5 @@
 
-def sort1(items: list[tuple[str, int]]) -> list[tuple[str,int]]:
+def sort1st(items: list[tuple[str, int]]) -> list[tuple[str,int]]:
     '''Rather than doing something complicated, we'll just use Python's 
        built-in sort, and give it a key definition: extract only the 
        first (string) component. This is a great application of some of the 

@@ -1,6 +1,6 @@
 import random
 import string
-from sort import sort
+from sort import sort1st
 
 # Setting: we're sorting (string, int) tuples based only on the first (string) component.
 # Thus, we can have objects in the list tht are equivalent (from the sort's perspective)
@@ -9,7 +9,7 @@ from sort import sort
 def test_unsorted_with_duplicate_strings():
     data = [("bob", 2), ("alice", 5), ("bob", 1), ("alice", 3)]
     
-    assert sort(data) == [("alice", 3), ("alice", 5), ("bob", 1), ("bob", 2)]
+    assert sort1st(data) == [("alice", 3), ("alice", 5), ("bob", 1), ("bob", 2)]
     # Would we also be OK with this next one?
     # assert sort(data) == [("alice", 5), ("alice", 3), ("bob", 1), ("bob", 2)]
     # If no, then we have an added property (stability) to think about. 
@@ -25,7 +25,7 @@ def test_sorted_correct_random():
     '''output is a sorted version of input'''
     for counter in range(1_000_000):
         input = generateRandomList()
-        output = sort(input)
+        output = sort1st(input)
         assert correctSorted(input, output)
     pass
 
@@ -35,12 +35,10 @@ def test_sorted_consistent():
        For now, let's just check consecutive invocations.'''
     for counter in range(1_000_000):
         input = generateRandomList()
-        output1 = sort(input)
-        output2 = sort(input)
+        output1 = sort1st(input)
+        output2 = sort1st(input)
         assert output1 == output2 
     pass
-
-
 
 def correctSorted(input: list, output: list):
     ###### PROPERTY: output is sorted: n+1th ele >= nth ele
