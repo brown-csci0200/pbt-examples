@@ -2,16 +2,21 @@ import random
 import string
 from sort import sort1st
 
+NUM_TRIALS = 1_000_000
+
 # Setting: we're sorting (string, int) tuples based only on the first (string) component.
 # Thus, we can have objects in the list tht are equivalent (from the sort's perspective)
 # that actually differ on their data, and are not "equal" to one another.
 
 def test_unsorted_with_duplicate_strings():
     data = [("bob", 2), ("alice", 5), ("bob", 1), ("alice", 3)]
+
+    assert sort1st(data) == [("alice", 5), ("alice", 3), ("bob", 2), ("bob", 1)]
     
-    assert sort1st(data) == [("alice", 3), ("alice", 5), ("bob", 1), ("bob", 2)]
     # Would we also be OK with this next one?
-    # assert sort(data) == [("alice", 5), ("alice", 3), ("bob", 1), ("bob", 2)]
+    # assert sort1st(data) == [("alice", 3), ("alice", 5), ("bob", 1), ("bob", 2)]
+    # How about this? 
+    # assert sort1st(data) == [("alice", 5), ("alice", 3), ("bob", 1), ("bob", 2)]
     # If no, then we have an added property (stability) to think about. 
     # If yes, then this test case is specialized (i.e., overfit) to our implementation.
 
@@ -23,7 +28,7 @@ def generateRandomList():
 
 def test_sorted_correct_random():
     '''output is a sorted version of input'''
-    for counter in range(1_000_000):
+    for counter in range(NUM_TRIALS):
         input = generateRandomList()
         output = sort1st(input)
         assert correctSorted(input, output)
@@ -33,7 +38,7 @@ def test_sorted_consistent():
     '''Is our sort deterministic, i.e., returns the same result always for the 
        same input? It's very hard, if not impossible, to test this perfectly. 
        For now, let's just check consecutive invocations.'''
-    for counter in range(1_000_000):
+    for counter in range(NUM_TRIALS):
         input = generateRandomList()
         output1 = sort1st(input)
         output2 = sort1st(input)
